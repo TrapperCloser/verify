@@ -1,0 +1,570 @@
+<html lang="en" class="blue-theme">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arras Verify</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="https://cdn.glitch.global/32303bfd-be9f-4f99-ad7b-e6ccf9a15601/public%2Ffavicon.png?v=1725868000963" type="image/x-icon">
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Arras Verify</h1>
+      <div id="serverStatus">Loading server status...</div>
+      <nav>
+        <button id="navVerification" disabled>
+          <i class="fas fa-check-circle" aria-hidden="true"></i> Verify
+        </button>
+        <button id="navUsers">
+          <i class="fas fa-users" aria-hidden="true"></i> Users
+        </button>
+        <button id="navChat">
+          <i class="fas fa-comments" aria-hidden="true"></i> Chat
+        </button>
+        <button id="navRules">
+          <i class="fas fa-book" aria-hidden="true"></i> Rules
+        </button>
+        <button id="navSettings">
+          <i class="fas fa-cog" aria-hidden="true"></i> Settings
+        </button>
+        <button id="navSuggestions" class="hidden">
+          <i class="fas fa-lightbulb" aria-hidden="true"></i> Suggestions
+        </button>
+        <button id="navSpecial" class="hidden">
+          <i class="fas fa-star" aria-hidden="true"></i> Special
+        </button>
+        <button id="navChangelog">
+          <i class="fas fa-history" aria-hidden="true"></i> Changelog
+        </button>
+        <button id="navStaff" class="hidden">
+          <i class="fas fa-shield-alt" aria-hidden="true"></i> Staff
+        </button>
+        <button id="navDatabase" class="hidden">
+          <i class="fas fa-database" aria-hidden="true"></i> Database
+        </button>
+        <button id="navDeveloper" class="hidden">
+          <i class="fas fa-code" aria-hidden="true"></i> Developer
+        </button>
+      </nav>
+      <section id="verificationSection">
+        <h2>User Verification</h2>
+        <div id="verificationInputs">
+          <input id="codeInput" type="text" placeholder="enter code...">
+          <button id="verifyCode">verify</button>
+        </div>
+        <div id="pfpPreviewContainer" class="hidden">
+          <img id="pfpPreview" src="" alt="Profile Picture Preview">
+        </div>
+        <p id="verifyStatus">Enter your verification code to access the system.</p>
+        <h4>Your Bio</h4>
+        <textarea id="descriptionInput" maxlength="2000" hidden placeholder="Enter a description here..."></textarea>
+        <input id="pfpInput" maxlength="100" hidden placeholder="Enter the link to your profile picture here...">
+        <br><button hidden id="unverifyButton">Disable Verification</button>
+      </section>
+      <section id="usersSection" class="hidden">
+        <h2>Verified Users</h2>
+        <p id="verifiedCount"></p>
+        <table id="verifiedTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Rank</th>
+              <th>Join Time</th>
+              <th>Trust Rank</th>
+            </tr>
+          </thead>
+          <tbody id="verified"></tbody>
+        </table>
+      </section>
+      <section id="chatSection" class="hidden">
+        <div id="chatHeader">
+          <h2>Chat</h2>
+        </div>
+        <div id="chatMessages"></div>
+        <div id="chatFooter">
+          <div id="usernameSection">
+            <input id="usernameInput" type="text" placeholder="Enter username...">
+            <br>
+            <br>
+          </div>
+          <div id="chatControls">
+            <input id="chatInput" type="text" placeholder="Enter message..." disabled>
+            <label for="uploadChat" class="disabled">
+              <i class="fas fa-paperclip"></i>
+            </label>
+            <input id="uploadChat" name="uploadChat" accept="
+              image/*
+            " type="file" disabled>
+            <button id="sendChat" disabled>
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+          <div id="chatUtilityButtons">
+            <button id="muteGuestsToggle" disabled class="disabled">
+              <i class="fas fa-ban"></i>
+              <span>Mute Guests: Off</span>
+            </button>
+            <button id="jumpToggle">
+              <i class="fas fa-arrow-down"></i>
+              <span>Jump To Bottom: On</span>
+            </button>
+            <button id="chatHelpButton">
+              <i class="fas fa-question"></i>
+              <span>Chat Help</span>
+            </button>
+            <button id="clearChatButton">
+              <i class="fas fa-trash"></i>
+              <span>Clear Chat</span>
+            </button>
+          </div>
+          <br>
+          <div id="replySection" hidden>
+            <div id="currentReply"><i class="fas fa-share"></i> <span id="replyText"></span></div>
+            <button id="cancelReply">Cancel</button>
+          </div>
+        </div>
+      </section>
+      <section id="rulesSection" class="hidden" aria-labelledby="rulesTitle">
+    <h2 id="rulesTitle"><i class="fas fa-book" aria-hidden="true"></i> Community Guidelines</h2>
+    <p>Note: these rules are just guidelines and we reserve the right to take action if we believe the content you post violates community standards. The rules include but are not limited to:</p>
+    <ul id="rulesList">
+        <li>
+            <i class="fas fa-ban" aria-hidden="true"></i>
+            <strong>No NSFW Content:</strong> Images and media containing extreme blood, gore, violence and/or adult content are strictly prohibited.
+        </li>
+        <li>
+            <i class="fas fa-comment-slash" aria-hidden="true"></i>
+            <strong>No Harmful Speech:</strong> Offensive text such as racial slurs and/or verbal harassment will result in a mute.
+        </li>
+        <li>
+            <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+            <strong>No Spam:</strong> Sending many messages in short periods of time and/or large text walls will result in a mute.
+        </li>
+        <li>
+            <i class="fas fa-ad" aria-hidden="true"></i>
+            <strong>No Advertising:</strong> Promoting irrelevant links and/or other media will result in a mute.
+        </li>
+        <li>
+            <i class="fas fa-user-slash" aria-hidden="true"></i>
+            <strong>No Exploiting:</strong> Circumventing punishments will result in more severe consequences, such as account suspension or an IP ban.
+        </li>
+    </ul>
+    <p>We thank you for respecting these guidelines and hope you have a positive experience.</p>
+</section>
+      <section id="settingsSection" class="hidden">
+  <h2>Settings</h2>
+  <div id="themeSelectSection">
+    <div id="themeSelectFlex">
+      <div>
+        <label for="themeSelect" id="themeLabel">Theme</label>
+        <select name="themeSelect" id="themeSelect">
+          <option value="blue">Blue</option>
+          <option value="green">Green</option>
+          <option value="lime">Lime</option>
+          <option value="orange">Orange</option>
+          <option value="pink">Pink</option>
+          <option value="purple">Purple</option>
+          <option value="red">Red</option>
+          <option value="gray">Gray</option>
+          <option value="abyss">Abyss</option>
+          <option value="neon">Neon</option>
+          <option value="arcane">Arcane</option>
+          <option value="white">White</option>
+          <option value="dark-mode">Dark Mode</option>
+          <option value="rainbow1">Rainbow (5s)</option>
+          <option value="rainbow2">Rainbow (30s)</option>
+          <option value="rainbow3">Rainbow (180s)</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+      <input type="color" name="themeCustomColor" id="themeCustomColor" value="#fffffe">
+    </div>
+    <div id="themeSelectMessage">
+      <div class="chatMessage">
+        <span class="broadcast">(Your Name#8295)</span>
+        <b id="chatColorLabel">&lt;Your Name&gt;</b>
+        <br>
+        This is how your messages will look with these settings
+      </div>
+    </div>
+  </div>
+  <br>
+  
+  <div id="chatSettingsSection">
+    <h3>Chat Display</h3>
+    <div id="fontSizeSelectSection">
+      <div id="fontSizeLabel">Font Size</div>
+      <button data-change="-1" class="fontSizeButton">⯆</button>
+      <span id="fontSize">16</span>
+      <button data-change="+1" class="fontSizeButton">⯅</button>
+    </div>
+    <hr>
+    <div id="chatNameColorSection">
+      <div id="chatColorText">Chat color (0 - 360)</div>
+      <input type="text" name="chatColor" id="chatColor">
+    </div>
+  </div>
+  <br>
+  
+  <div id="toggleSection">
+    <h3>Accessibility Options</h3>
+    <div class="toggle-setting">
+      <label for="darkModeToggle">
+        <i class="fas fa-moon"></i> Dark Mode
+      </label>
+      <label class="switch">
+        <input type="checkbox" id="darkModeToggle">
+        <span class="slider round"></span>
+      </label>
+    </div>
+    <div class="toggle-setting">
+      <label for="reducedMotionToggle">
+        <i class="fas fa-stopwatch"></i> Reduced Motion
+      </label>
+      <label class="switch">
+        <input type="checkbox" id="reducedMotionToggle">
+        <span class="slider round"></span>
+      </label>
+    </div>
+    <div class="toggle-setting">
+      <label for="compactModeToggle">
+        <i class="fas fa-compress"></i> Compact Mode
+      </label>
+      <label class="switch">
+        <input type="checkbox" id="compactModeToggle">
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+  <br>
+  
+  <button id="clearStorage">Clear Settings</button>
+</section>
+      <section id="suggestionsSection" class="hidden">
+        <h2>Suggestions</h2>
+        <p>
+          Suggest your ideas for Arras Verify here!<br><br>
+          Suggestions are limited to 2,000 characters.<br>
+          Only one suggestion is allowed per account. If you create a new
+          suggestion, it will delete your previous suggestion.
+        </p>
+        <textarea name="suggestionInput" id="suggestionInput" maxlength="2000"></textarea>
+        <button id="suggestionSubmit">Submit</button>
+      </section>
+      <section id="specialSection" class="hidden">
+        <h2>Special</h2>
+        <h3>Testing's Themes</h3>
+        <div id="themeGalleryContainer">
+          <table id="themeGalleryTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Color</th>
+                <th>Group</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="themeGallery"></tbody>
+          </table>
+        </div>
+        <br>
+        <h3>Trust Voting (experimental)</h3><br>
+        <button id="userlistSorting">Sort by: Last Joined</button><br><br>
+        <input type="text" name="userlistSearch" id="userlistSearch" placeholder="Search users...">
+        <div id="userlistContainer">
+          <table id="userTableTable">
+            <tbody id="userTable"></tbody>
+          </table>
+        </div>
+        <p>Selected user: <span id="selectedUser">none</span></p>
+        <select name="trustLevelSelect" id="trustLevelSelect">
+          <option value="0">Abuser (0.0)</option>
+          <option value="1">Abuser (1.0)</option>
+          <option value="2">Not Trust (2.0)</option>
+          <option value="3">Not Trust (3.0)</option>
+          <option value="4">Not Trust (4.0)</option>
+          <option value="5" selected="selected">Neutral (5.0)</option>
+          <option value="6">Somewhat Trusted (6.0)</option>
+          <option value="7">Trusted (7.0)</option>
+          <option value="8">Very Trusted (8.0)</option>
+          <option value="9">Highly Trusted (9.0)</option>
+          <option value="10">Super Trusted (10.0)</option>
+        </select>
+        <button id="submitTrust" disabled>Update</button>
+      </section>
+      <section id="changelogSection" class="hidden">
+        <h2>Changelog</h2>
+        <div class="changelogBlock">
+          <h3>26th February 2026 - v1.5</h3>
+          <hr>
+          <ul>
+            <li><i class="fas fa-database"></i> (Suggested by Eternal.) Increased the efficiency of the site's rate limit.</li>
+            <li><i class="fas fa-wrench"></i> Added a button to disable automatic verification.</li>
+            <li><i class="fas fa-star"></i> Increased the precision of all voted trust values to 3 decimal places.</li>
+          </ul>
+        </div>
+        <div class="changelogBlock">
+          <h3>26th February 2026 - v1.42</h3>
+          <hr>
+          <ul>
+            <li><i class="fas fa-palette"></i> (Suggested by Shiny Beta Cube.) Increased the brightness of the Arcane theme.</li>
+            <li><i class="fas fa-star"></i> (Suggested via #wpd.) The userlist can now be sorted by trust rank.</li>
+            <li><i class="fas fa-wrench"></i> Users will be automatically verified when loading the page if they have entered their code once.</li>
+          </ul>
+        </div>
+        <div class="changelogBlock">
+          <h3>22nd February 2026 - v1.41</h3>
+          <hr>
+          <ul>
+            <li><i class="fas fa-palette"></i> (Suggested by Shiny Beta Cube.) Added the Arcane theme.</li>
+          </ul>
+        </div>
+        <div class="changelogBlock">
+          <h3>18th February 2026 - v1.4</h3>
+          <hr>
+          <ul>
+            <li><i class="fas fa-star"></i> Added the special section.</li>
+          </ul>
+        </div>
+        <div class="changelogBlock">
+          <h3>18th February 2026 - v1.31</h3>
+          <hr>
+          <ul>
+            <li><i class="fas fa-palette"></i> (Suggested by Juan.) Added a neon theme.</li>
+          </ul>
+        </div>
+        <div class="changelogBlock">
+          <h3>18th February 2026 - v1.30_1</h3>
+          <hr>
+          <ul>
+            <li><i class="fas fa-wrench"></i> Fixed viewing descriptions from chat messages.</li>
+            <li><i class="fas fa-history"></i> Added a missing dot. You'll never know where it was. :)</li>
+          </ul>
+        </div>
+        <div class="changelogBlock">
+          <h3>18th February 2026 - v1.3</h3>
+          <hr>
+          <ul>
+            <li><i class="fas fa-image"></i> (Suggested by many users.) Added profile images.</li>
+            <li><i class="fas fa-info-circle"></i> Descriptions are now scrollable.</li>
+          </ul>
+        </div>
+        <div class="changelogBlock">
+          <h3>18th February 2026 - v1.20_1</h3>
+          <hr>
+          <ul>
+            <li><i class="fas fa-wrench"></i> Descriptions are now scrollable.</li>
+          </ul>
+        </div>
+        <div class="changelogBlock">
+          <h3>17th February 2026 - v1.2</h3>
+          <hr>
+          <ul>
+            <li><i class="fas fa-info-circle"></i> (Suggested by d2.) Descriptions are now accessible from the verified users list.</li>
+            <li><i class="fas fa-cog"></i> (Suggested by Sandbox Traveler and Friendly Auto-Smasher.) Added a setting for custom name colors.</li>
+            <li><i class="fas fa-question"></i> (Suggested by Sandbox Traveler.) Added a "chat help" button.</li>
+            <li><i class="fas fa-comment-slash"></i> (Suggested by Sandbox Traveler.) Added a limit to mute durations.</li>
+          </ul>
+        </div>
+        <div class="changelogBlock">
+          <h3>17th February 2026 - v1.1</h3>
+          <hr>
+          <ul>
+            <li><i class="fas fa-lightbulb"></i> Added the suggestions section.</li>
+          </ul>
+        </div>
+        <div class="changelogBlock">
+          <h3>16th February 2026 - v1.01_1</h3>
+          <hr>
+          <ul>
+            <li><i class="fas fa-wrench"></i> Fixed the "mute guests" toggle.</li>
+          </ul>
+        </div>
+        <div class="changelogBlock">
+          <h3>16th February 2026 - v1.0.1</h3>
+          <hr>
+          <ul>
+            <li><i class="fas fa-check"></i> Added a new UI for moderators.</li>
+            <li><i class="fas fa-wrench"></i> Fixed replying to image uploads not working.</li>
+            <li><i class="fas fa-info-circle"></i> Changed the icon for sandboxes.</li>
+            <li><i class="fas fa-server"></i> Main servers now show at 80 players.</li>
+            <li><i class="fas fa-users"></i> Changed the threshold to show sandboxes from 5 to 8 players.</li>
+            <li><i class="fas fa-ban"></i> Added a list of banned words.</li>
+          </ul>
+        </div>
+        <div class="changelogBlock">
+          <h3>15th February 2026</h3>
+          <hr>
+          <ul>
+            <li><i class="fas fa-star"></i> Added icons to many sections of the UI.</li>
+            <li><i class="fas fa-comments"></i> Reworked the UI of the chat section.</li>
+            <li><i class="fas fa-history"></i> Added the changelog section.</li>
+          </ul>
+        </div>
+        <hr>
+        <h2>Older Changelog</h2>
+        <hr>
+        <div class="changelogBlock">
+          <div class="changelogBlock">
+            <h3>3rd May 2025 - Version 2.1.1</h3>
+            <hr>
+            <ul>
+              <li><i class="fas fa-bolt" aria-hidden="true"></i> Performance improvements throughout the application</li>
+              <li><i class="fas fa-lock" aria-hidden="true"></i> Enhanced security for all API endpoints and socket communications</li>
+              <li><i class="fas fa-compress" aria-hidden="true"></i> Added compact mode for chat messages</li>
+              <li><i class="fas fa-user-shield" aria-hidden="true"></i> Improved moderation tools for administrators</li>
+              <li><i class="fas fa-file-export" aria-hidden="true"></i> Added ability to export chat history</li>
+              <li><i class="fas fa-search" aria-hidden="true"></i> Added user filtering in the Users tab</li>
+              <li><i class="fas fa-code" aria-hidden="true"></i> Code optimizations and bug fixes</li>
+            </ul>
+          </div>
+          
+          <div class="changelogBlock">
+            <h3>30th April 2025 - Version 2.0.5</h3>
+            <hr>
+            <ul>
+              <li><i class="fas fa-code" aria-hidden="true"></i> Improved application performance and security.</li>
+              <li><i class="fas fa-universal-access" aria-hidden="true"></i> Enhanced accessibility with better screen reader support.</li>
+              <li><i class="fas fa-moon" aria-hidden="true"></i> Added dark mode setting.</li>
+              <li><i class="fas fa-running" aria-hidden="true"></i> Added reduced motion setting for animations.</li>
+            </ul>
+          </div>
+          
+          <div class="changelogBlock">
+            <h3>29th April 2025</h3>
+            <hr>
+            <ul>
+              <li><i class="fas fa-user-circle" aria-hidden="true"></i> Added the ability to view profiles. You can now click someone's name in chat to view their profile.</li>
+              <li><i class="fas fa-pen" aria-hidden="true"></i> You can now update your profile description.</li>
+            </ul>
+          </div>
+          
+          <div class="changelogBlock">
+            <h3>28th April 2025</h3>
+            <hr>
+            <ul>
+              <li><i class="fas fa-cog" aria-hidden="true"></i> Added a new tab 'settings' to replace 'suggestions'.</li>
+              <li><i class="fas fa-bell" aria-hidden="true"></i> You can now enable or disable ping noises.</li>
+              <li><i class="fas fa-flask" aria-hidden="true"></i> You can now control whether or not you want to partake in experiments.</li>
+            </ul>
+          </div>
+          
+          <div class="changelogBlock">
+            <h3>25th April 2025</h3>
+            <hr>
+            <ul>
+              <li><i class="fas fa-envelope" aria-hidden="true"></i> DMs are now publicly available to users.</li>
+              <li><i class="fas fa-palette" aria-hidden="true"></i> DMs now have a unique color to their messages.</li>
+              <li><i class="fas fa-reply" aria-hidden="true"></i> DMs can now be replied to privately instead of publicly.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section id="staffSection" class="hidden">
+        <h2>Moderation Tools</h2>
+        <div id="modControls">
+          <div class="mod-group">
+            <h3><i class="fas fa-gavel"></i> Mute User</h3>
+            <div class="mod-row">
+              <select name="moderationUsers" id="moderationUsers"></select>
+              <input type="text" id="muteTime" placeholder="Mute time (e.g. 10m, 1h)">
+              <button id="muteSubmit"><i class="fas fa-comment-slash"></i> Mute</button>
+            </div>
+          </div>
+          <div class="mod-group">
+            <h3><i class="fas fa-bullhorn"></i> Broadcast</h3>
+            <div class="mod-row">
+              <input type="text" id="bcText" placeholder="Enter broadcast message...">
+              <button id="bcSubmit"><i class="fas fa-bell"></i> Send</button>
+            </div>
+          </div>
+          <div class="mod-group">
+            <h3><i class="fas fa-ban"></i> Guest Settings</h3>
+            <div class="mod-row">
+              <button id="muteGuestsSubmit"><i class="fas fa-volume-mute"></i> Toggle Guest Mute</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="databaseSection" class="hidden">
+        <h2>Database</h2>
+        <h3>Add a code</h3>
+        <p>Managers may only delete or create codes with rank "user".</p>
+        <input id="newNameInput" type="text" placeholder="Enter name...">
+        <select id="newRankInput">
+          <option value="user">User</option>
+          <option value="youtuber">YouTuber (dev only)</option>
+          <option value="director">Director (dev only)</option>
+          <option value="trial">Trial (dev only)</option>
+          <option value="manager">Manager (dev only)</option>
+        </select>
+        <input id="newCodeInput" type="text" placeholder="Enter code...">
+        <button id="newCodeButton">Create Code</button>
+        <br><br>
+        <h3>Database Contents</h3>
+        <div id="databaseContainer">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Role</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="database"></tbody>
+          </table>
+        </div>
+      </section>
+      <section id="developerSection" class="hidden">
+        <h2>Developer Tools</h2>
+        <h3>Suggestions</h3>
+        <br>
+        <table>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Name</th>
+              <th>Suggestion</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="suggestions"></tbody>
+        </table>
+      </section>
+      <div id="descriptionOverlay" hidden>
+        <div id="descriptionDarken" class="minimize"></div>
+        <div id="descriptionFlex">
+          <div id="descriptionContainer" class="minimize">
+            <div id="descriptionPfpContainer" class="hidden">
+              <img id="descriptionPfp" src="" alt="Profile Picture">
+            </div>
+            <b id="descriptionUsername" class="neo subrainbow">Username</b>
+            <div id="descriptionRank">Rank: <b>User</b></div>
+            <div>Voted Trust Rank: <b id="descriptionTrust">???</b></div>
+            <div id="descriptionText">Description</div>
+            <br>
+            <div id="descriptionButtons">
+              <button id="closeDescription">
+                <i class="fas fa-times"></i> Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="infoPopup" class="hide">
+        <i class="fas fa-bell"></i>
+        <span id="infoText"></span>
+      </div>
+      <footer>
+        Edited by Trapper
+        <hr>
+        <a href="https://vercel-tinkering.vercel.app/">Original by Testing</a>
+        <br>
+        <br>
+        Idea from the original Arras Verify, made by MLG, Flowey and Testing.
+      </footer>
+    </div>
+  </body>
+</html>
